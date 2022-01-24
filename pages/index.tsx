@@ -1,8 +1,15 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import { Proto } from '../api/generated/protocol'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
+  const subtitle: Proto.ITitle = {
+    description: "test",
+    id: 1,
+    name: "title1",
+    thumbnailUrl: "https://via.placeholder.com/360"
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -15,6 +22,7 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+        <h2>{subtitle}</h2>
 
         <p className={styles.description}>
           Get started by editing{' '}
