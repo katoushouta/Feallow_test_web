@@ -59,6 +59,57 @@ export namespace Proto {
         public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Proto.Chapter;
     }
 
+    /** Properties of a Tag. */
+    interface ITag {
+
+        /** Tag id */
+        id?: (number|null);
+
+        /** Tag name */
+        name?: (string|null);
+    }
+
+    /** Represents a Tag. */
+    class Tag implements ITag {
+
+        /**
+         * Constructs a new Tag.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: Proto.ITag);
+
+        /** Tag id. */
+        public id: number;
+
+        /** Tag name. */
+        public name: string;
+
+        /**
+         * Creates a new Tag instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns Tag instance
+         */
+        public static create(properties?: Proto.ITag): Proto.Tag;
+
+        /**
+         * Encodes the specified Tag message. Does not implicitly {@link Proto.Tag.verify|verify} messages.
+         * @param message Tag message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: Proto.ITag, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a Tag message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns Tag
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Proto.Tag;
+    }
+
     /** Properties of a Title. */
     interface ITitle {
 
@@ -125,8 +176,8 @@ export namespace Proto {
     /** Properties of a HomeView. */
     interface IHomeView {
 
-        /** HomeView titles */
-        titles?: (Proto.ITitle[]|null);
+        /** HomeView titlesByTag */
+        titlesByTag?: (Proto.HomeView.ITitlesByTag[]|null);
     }
 
     /** Represents a HomeView. */
@@ -138,8 +189,8 @@ export namespace Proto {
          */
         constructor(properties?: Proto.IHomeView);
 
-        /** HomeView titles. */
-        public titles: Proto.ITitle[];
+        /** HomeView titlesByTag. */
+        public titlesByTag: Proto.HomeView.ITitlesByTag[];
 
         /**
          * Creates a new HomeView instance using the specified properties.
@@ -165,6 +216,60 @@ export namespace Proto {
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Proto.HomeView;
+    }
+
+    namespace HomeView {
+
+        /** Properties of a TitlesByTag. */
+        interface ITitlesByTag {
+
+            /** TitlesByTag tag */
+            tag?: (Proto.ITag|null);
+
+            /** TitlesByTag titles */
+            titles?: (Proto.ITitle[]|null);
+        }
+
+        /** Represents a TitlesByTag. */
+        class TitlesByTag implements ITitlesByTag {
+
+            /**
+             * Constructs a new TitlesByTag.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: Proto.HomeView.ITitlesByTag);
+
+            /** TitlesByTag tag. */
+            public tag?: (Proto.ITag|null);
+
+            /** TitlesByTag titles. */
+            public titles: Proto.ITitle[];
+
+            /**
+             * Creates a new TitlesByTag instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TitlesByTag instance
+             */
+            public static create(properties?: Proto.HomeView.ITitlesByTag): Proto.HomeView.TitlesByTag;
+
+            /**
+             * Encodes the specified TitlesByTag message. Does not implicitly {@link Proto.HomeView.TitlesByTag.verify|verify} messages.
+             * @param message TitlesByTag message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: Proto.HomeView.ITitlesByTag, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TitlesByTag message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TitlesByTag
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Proto.HomeView.TitlesByTag;
+        }
     }
 
     /** Properties of a SearchView. */

@@ -137,6 +137,113 @@ export const Proto = $root.Proto = (() => {
         return Chapter;
     })();
 
+    Proto.Tag = (function() {
+
+        /**
+         * Properties of a Tag.
+         * @memberof Proto
+         * @interface ITag
+         * @property {number|null} [id] Tag id
+         * @property {string|null} [name] Tag name
+         */
+
+        /**
+         * Constructs a new Tag.
+         * @memberof Proto
+         * @classdesc Represents a Tag.
+         * @implements ITag
+         * @constructor
+         * @param {Proto.ITag=} [properties] Properties to set
+         */
+        function Tag(properties) {
+            if (properties)
+                for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Tag id.
+         * @member {number} id
+         * @memberof Proto.Tag
+         * @instance
+         */
+        Tag.prototype.id = 0;
+
+        /**
+         * Tag name.
+         * @member {string} name
+         * @memberof Proto.Tag
+         * @instance
+         */
+        Tag.prototype.name = "";
+
+        /**
+         * Creates a new Tag instance using the specified properties.
+         * @function create
+         * @memberof Proto.Tag
+         * @static
+         * @param {Proto.ITag=} [properties] Properties to set
+         * @returns {Proto.Tag} Tag instance
+         */
+        Tag.create = function create(properties) {
+            return new Tag(properties);
+        };
+
+        /**
+         * Encodes the specified Tag message. Does not implicitly {@link Proto.Tag.verify|verify} messages.
+         * @function encode
+         * @memberof Proto.Tag
+         * @static
+         * @param {Proto.ITag} message Tag message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Tag.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
+            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+            return writer;
+        };
+
+        /**
+         * Decodes a Tag message from the specified reader or buffer.
+         * @function decode
+         * @memberof Proto.Tag
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {Proto.Tag} Tag
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Tag.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            let end = length === undefined ? reader.len : reader.pos + length, message = new $root.Proto.Tag();
+            while (reader.pos < end) {
+                let tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.id = reader.uint32();
+                    break;
+                case 2:
+                    message.name = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        return Tag;
+    })();
+
     Proto.Title = (function() {
 
         /**
@@ -278,7 +385,7 @@ export const Proto = $root.Proto = (() => {
          * Properties of a HomeView.
          * @memberof Proto
          * @interface IHomeView
-         * @property {Array.<Proto.ITitle>|null} [titles] HomeView titles
+         * @property {Array.<Proto.HomeView.ITitlesByTag>|null} [titlesByTag] HomeView titlesByTag
          */
 
         /**
@@ -290,7 +397,7 @@ export const Proto = $root.Proto = (() => {
          * @param {Proto.IHomeView=} [properties] Properties to set
          */
         function HomeView(properties) {
-            this.titles = [];
+            this.titlesByTag = [];
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -298,12 +405,12 @@ export const Proto = $root.Proto = (() => {
         }
 
         /**
-         * HomeView titles.
-         * @member {Array.<Proto.ITitle>} titles
+         * HomeView titlesByTag.
+         * @member {Array.<Proto.HomeView.ITitlesByTag>} titlesByTag
          * @memberof Proto.HomeView
          * @instance
          */
-        HomeView.prototype.titles = $util.emptyArray;
+        HomeView.prototype.titlesByTag = $util.emptyArray;
 
         /**
          * Creates a new HomeView instance using the specified properties.
@@ -329,9 +436,9 @@ export const Proto = $root.Proto = (() => {
         HomeView.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.titles != null && message.titles.length)
-                for (let i = 0; i < message.titles.length; ++i)
-                    $root.Proto.Title.encode(message.titles[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.titlesByTag != null && message.titlesByTag.length)
+                for (let i = 0; i < message.titlesByTag.length; ++i)
+                    $root.Proto.HomeView.TitlesByTag.encode(message.titlesByTag[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
             return writer;
         };
 
@@ -354,9 +461,9 @@ export const Proto = $root.Proto = (() => {
                 let tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    if (!(message.titles && message.titles.length))
-                        message.titles = [];
-                    message.titles.push($root.Proto.Title.decode(reader, reader.uint32()));
+                    if (!(message.titlesByTag && message.titlesByTag.length))
+                        message.titlesByTag = [];
+                    message.titlesByTag.push($root.Proto.HomeView.TitlesByTag.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -365,6 +472,117 @@ export const Proto = $root.Proto = (() => {
             }
             return message;
         };
+
+        HomeView.TitlesByTag = (function() {
+
+            /**
+             * Properties of a TitlesByTag.
+             * @memberof Proto.HomeView
+             * @interface ITitlesByTag
+             * @property {Proto.ITag|null} [tag] TitlesByTag tag
+             * @property {Array.<Proto.ITitle>|null} [titles] TitlesByTag titles
+             */
+
+            /**
+             * Constructs a new TitlesByTag.
+             * @memberof Proto.HomeView
+             * @classdesc Represents a TitlesByTag.
+             * @implements ITitlesByTag
+             * @constructor
+             * @param {Proto.HomeView.ITitlesByTag=} [properties] Properties to set
+             */
+            function TitlesByTag(properties) {
+                this.titles = [];
+                if (properties)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * TitlesByTag tag.
+             * @member {Proto.ITag|null|undefined} tag
+             * @memberof Proto.HomeView.TitlesByTag
+             * @instance
+             */
+            TitlesByTag.prototype.tag = null;
+
+            /**
+             * TitlesByTag titles.
+             * @member {Array.<Proto.ITitle>} titles
+             * @memberof Proto.HomeView.TitlesByTag
+             * @instance
+             */
+            TitlesByTag.prototype.titles = $util.emptyArray;
+
+            /**
+             * Creates a new TitlesByTag instance using the specified properties.
+             * @function create
+             * @memberof Proto.HomeView.TitlesByTag
+             * @static
+             * @param {Proto.HomeView.ITitlesByTag=} [properties] Properties to set
+             * @returns {Proto.HomeView.TitlesByTag} TitlesByTag instance
+             */
+            TitlesByTag.create = function create(properties) {
+                return new TitlesByTag(properties);
+            };
+
+            /**
+             * Encodes the specified TitlesByTag message. Does not implicitly {@link Proto.HomeView.TitlesByTag.verify|verify} messages.
+             * @function encode
+             * @memberof Proto.HomeView.TitlesByTag
+             * @static
+             * @param {Proto.HomeView.ITitlesByTag} message TitlesByTag message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            TitlesByTag.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.tag != null && Object.hasOwnProperty.call(message, "tag"))
+                    $root.Proto.Tag.encode(message.tag, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                if (message.titles != null && message.titles.length)
+                    for (let i = 0; i < message.titles.length; ++i)
+                        $root.Proto.Title.encode(message.titles[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                return writer;
+            };
+
+            /**
+             * Decodes a TitlesByTag message from the specified reader or buffer.
+             * @function decode
+             * @memberof Proto.HomeView.TitlesByTag
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {Proto.HomeView.TitlesByTag} TitlesByTag
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            TitlesByTag.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.Proto.HomeView.TitlesByTag();
+                while (reader.pos < end) {
+                    let tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.tag = $root.Proto.Tag.decode(reader, reader.uint32());
+                        break;
+                    case 2:
+                        if (!(message.titles && message.titles.length))
+                            message.titles = [];
+                        message.titles.push($root.Proto.Title.decode(reader, reader.uint32()));
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            return TitlesByTag;
+        })();
 
         return HomeView;
     })();
