@@ -1,16 +1,24 @@
 
-import Image from 'next/image'
-import { Proto } from '../api/protocol'
-import styles from '../styles/Home.module.css'
+import { dummyHomeView } from '../mock/view/home'
+import { Title } from '../parts/title/title'
+import styles from '../styles/Home.module.sass'
 
 export default function Home() {
-  const subtitle: Proto.ITitle = {
-    description: "test",
-    id: 1,
-    name: "title1",
-    thumbnailUrl: "https://via.placeholder.com/360"
-  }
+  const apiData = dummyHomeView
   return (
-    <div className={styles.container} ><p>sss</p></div>
+    <div className={styles.container} >
+      {apiData.titlesByTag.map((v, i) => {
+        return (
+          <div className={styles.tagSection} key={i} >
+            <p className={styles.tagName}>{v.tag.name}</p>
+            <div className={styles.titles}>
+              {v.titles.map((t, i) => (
+                <Title {...t} key={i} />
+              ))}
+            </div>
+          </div>
+        )
+      })}
+    </div>
   )
 }
