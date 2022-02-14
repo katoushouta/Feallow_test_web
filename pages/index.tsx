@@ -1,8 +1,6 @@
 
 import { dummyHomeView } from '../mock/view/home'
 import { Base } from '../parts/Base/base'
-import { Footer } from '../parts/Footer/footer'
-import { Header } from '../parts/Header/header'
 import { Title } from '../parts/Title/title'
 import styles from '../styles/Home.module.sass'
 
