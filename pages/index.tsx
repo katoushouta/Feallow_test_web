@@ -4,9 +4,9 @@ import { Proto } from '../api/protocol'
 import { dummyHomeView } from '../mock/view/home'
 import { Base } from '../parts/Base/base'
 import { Title } from '../parts/title/title'
-import styles from '../styles/Home.module.sass'
+import styles from '../styles/pages/Home.module.sass'
 export const getStaticProps: GetStaticProps = async (context) => {
-  const dummy = false
+  const dummy = true
   if (dummy) {
     return {
       props: {
@@ -15,7 +15,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       }
     }
   }
-  const getHome = () => fetch("http://w-lu.net:18080/api/home")
+  const getData = () => fetch("http://w-lu.net:18080/api/home")
     .then(r => {
       if (r.status >= 404) {
         const msg = r.text()
@@ -26,7 +26,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       }
     })
   try {
-    const data = await getHome()
+    const data = await getData()
     const decoded = Proto.HomeView.decode(new Uint8Array(data))
     const apiData = JSON.parse(JSON.stringify(decoded))
     return {
