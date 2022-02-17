@@ -5,12 +5,12 @@ import s from "./base.module.sass"
 
 export const Base: React.FC<{}> = (props) => {
     return (
-        <>
-            <Header />
+        <div className={s.wrap}>
+            <div className={s.header}><Header /></div>
             <div className={s.main} >
                 {props.children}
             </div>
-            <Footer />
-        </>
+            <div className={s.footer}><Footer /></div>
+        </div>
     )
 }
