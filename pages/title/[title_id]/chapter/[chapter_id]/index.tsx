@@ -26,7 +26,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export default function ViewerView(props: {
     data: Proto.ViewerView
 }) {
-    const page: (Image | EmbeddedElement)[] = props.data?.imageUrls?.map(p => {
+    const page: (Image | EmbeddedElement)[] = props.data?.imageUrls.map(p => {
         if (p) return {
             src: p,
             type: "image"
@@ -34,11 +34,13 @@ export default function ViewerView(props: {
     })
     return (
         <div>
+            <div>
             <Viewer
                 src={page}
                 breakpoint={{type: "ratio", value: 1}}
                 centerizeFirstPage={false}
             />
+            </div>
         </div>
     )
 }

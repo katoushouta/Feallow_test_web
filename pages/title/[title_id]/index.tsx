@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from "next"
+import Link from "next/link"
 import { Proto } from "../../../api/protocol"
 import { makeDummyDetailView } from "../../../mock/view/detail"
 import { Base } from "../../../parts/Base/base"
@@ -10,7 +11,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
     return {
         props: {
             data: apiData,
-            error: null
+            error: null,
+            titleId
         }
     }
 }
@@ -22,6 +24,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 export default function TitleDetail(props:{
     data: Proto.TitleDetailView
+    titleId: number
 }) {
     return (
         <Base>
@@ -32,10 +35,10 @@ export default function TitleDetail(props:{
             </div>
             <div className={s.chapters}>
                 {props.data?.chapters?.map((c, i) => (
-                    <div className={s.chapter} key={i}>
+                    <Link href={`/title/${props?.titleId}/chapter/${c?.id}`} key={i}><a className={s.chapter}>
                         <img src={c?.thumbnailUrl} />
                         <p>{c?.name}</p>
-                    </div>
+                    </a></Link>
                 ))}
             </div>
         </Base>
