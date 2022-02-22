@@ -1,0 +1,57 @@
+@import 'styles/utill.sass'
+    
+.tab
+    margin: 0 0 56px
+    display: flex
+    justify-content: center
+    align-items: center
+    column-gap: 32px
+    > p, a
+        width: 88px
+        text-align: center
+        //border-bottom: 4px solid #226ed1
+        padding: 8px 0
+        font-weight: bold
+    > a
+        box-shadow: 0 0 16px #dddddd
+        border-radius: 8px
+        border: none
+.input
+    text-align: center
+    margin: auto
+    width: 560px
+    max-width: 100%
+    position: relative
+    > input
+        border-radius: 8px
+        width: 100%
+        padding: 8px
+        box-shadow: inset 2px 0px 4px #dddddd
+        border: none
+        &:focus 
+            box-shadow: inset 1px 0px 2px #dddddd
+            outline: none
+    &.result
+        margin: auto auto auto 0
+    > a
+        position: absolute
+        right: 8px
+        top: 0
+        bottom: 0
+        margin: auto
+        height: 16px
+        cursor: pointer
+.container
+    max-width: $container_width
+    margin: 54px auto 96px
+    > h1
+        font-weight: bold
+        font-size: 22px
+        margin: 32px 0 24px
+    .titles
+        max-width: 100%
+        display: grid
+        grid-template-columns: repeat( auto-fill , minmax(240px, 1fr))
+        column-gap: 24px
+        > a
+            margin-bottom: 16px

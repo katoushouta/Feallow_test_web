@@ -5,6 +5,7 @@ import { dummyHomeView } from '../mock/view/home'
 import { Base } from '../parts/Base/base'
 import { Title } from '../parts/title/title'
 import styles from '../styles/pages/Home.module.sass'
+import { Switcher } from './search'
 export const getStaticProps: GetStaticProps = async (context) => {
   const dummy = true
   if (dummy) {
@@ -51,6 +52,7 @@ export default function Home(props: {
   return (
     <Base>
       <div className={styles.container} >
+        <Switcher />
         {props.data?.titlesByTag.map((v, i) => {
           return (
             <div className={styles.tagSection} key={i} >
