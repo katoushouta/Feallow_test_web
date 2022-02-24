@@ -1,5 +1,6 @@
 
 import { GetStaticProps } from 'next'
+import { getApi } from '../api/getApi'
 import { Proto } from '../api/protocol'
 import { dummyHomeView } from '../mock/view/home'
 import { Base } from '../parts/Base/base'
@@ -7,7 +8,7 @@ import { Title } from '../parts/title/title'
 import styles from '../styles/pages/Home.module.sass'
 import { Switcher } from './search'
 export const getStaticProps: GetStaticProps = async (context) => {
-  const dummy = true
+  const dummy = false
   if (dummy) {
     return {
       props: {
@@ -16,33 +17,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
       }
     }
   }
-  const getData = () => fetch("http://w-lu.net:18080/api/home")
-    .then(r => {
-      if (r.status >= 404) {
-        const msg = r.text()
-        throw {statusCode: r.status,message: msg }
-      }
-      if (r.ok) {
-        return r.arrayBuffer()
-      }
-    })
-  try {
-    const data = await getData()
-    const decoded = Proto.HomeView.decode(new Uint8Array(data))
-    const apiData = JSON.parse(JSON.stringify(decoded))
-    return {
-      props: {
-        data: apiData,
-        error: null
-      }
-    }
-  } catch (e) {
-    return {
-      props: {
-        data: null,
-        error: {statusCode: 404}
-      }
-    }
+  const apiData = await getApi("home")
+  return {
+    props: { ...apiData }
   }
 }
 

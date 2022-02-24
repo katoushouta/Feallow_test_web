@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 import Link from "next/link"
+import { getApi } from "../../../api/getApi"
 import { Proto } from "../../../api/protocol"
 import { makeDummyDetailView } from "../../../mock/view/detail"
 import { Base } from "../../../parts/Base/base"
@@ -7,11 +8,16 @@ import s from '../../../styles/pages/Detail.module.sass'
 
 export const getStaticProps: GetStaticProps = async (context) => {
     const titleId = context.params.title_id as string
-    const apiData = makeDummyDetailView(Number(titleId))
+    const mock = false
+    const apiData = mock 
+        ?{
+            data: makeDummyDetailView(Number(titleId)),
+            error: null
+        }
+        : await getApi("title/detail", ["title_id=" + titleId])
     return {
         props: {
-            data: apiData,
-            error: null,
+            ...apiData,
             titleId
         }
     }

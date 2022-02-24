@@ -1,5 +1,6 @@
 import { GetServerSideProps } from "next"
 import { Searcher, Switcher } from "."
+import { getApi } from "../../api/getApi"
 import { Proto } from "../../api/protocol"
 import { makeDummyTitle } from "../../mock/model/title"
 import { Base } from "../../parts/Base/base"
@@ -8,10 +9,10 @@ import s from "../../styles/pages/Search.module.sass"
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const word = context.query.word as string?? ""
-    const apiData: Proto.SearchView = {titles: [1,2,3,4,5,6,7,8,9,10,11,12,13,14].map(id => makeDummyTitle(id))}
+    const apiData = await getApi("search", ["word=" + word])
     return {
         props: {
-            data: apiData,
+            ...apiData,
             word
         }
     }
