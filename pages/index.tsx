@@ -17,7 +17,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       }
     }
   }
-  const apiData = await getApi("home")
+  const apiData = await getApi("home", Proto.HomeView.decode)
   return {
     props: { ...apiData }
   }

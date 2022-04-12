@@ -15,7 +15,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const apiData = isDummy? {
         data: dummy,
         error: null
-    }: await getApi("viewer", ["chapter_id=" + id])
+    }: await getApi("viewer", Proto.ViewerView.decode, ["chapter_id=" + id])
     return {
         props: {
             ...apiData

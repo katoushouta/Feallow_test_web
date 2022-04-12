@@ -14,7 +14,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
             data: makeDummyDetailView(Number(titleId)),
             error: null
         }
-        : await getApi("title/detail", ["title_id=" + titleId])
+        : await getApi("title/detail", Proto.TitleDetailView.decode,["title_id=" + titleId])
     return {
         props: {
             ...apiData,

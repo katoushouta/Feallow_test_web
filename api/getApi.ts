@@ -1,4 +1,4 @@
-export const getApi = async (url: string, query?: string[]) => {
+export const getApi = async (url: string,  decoder: (buffer: Uint8Array) => any, query?: string[]) => {
     const baseUrl = "http://w-lu.net:18080/api/"
     let querys = []
     query?.map((v, i) => {
@@ -10,8 +10,7 @@ export const getApi = async (url: string, query?: string[]) => {
         }
         querys.push(w)
     }) 
-    const format = query?.length > 0? "&format=json": "?format=json"
-    const apiUrl = baseUrl + url + querys.join("") + format
+    const apiUrl = baseUrl + url + querys.join("")
     console.log("api", apiUrl)
     const getData = () => fetch(apiUrl)
       .then(r => {
@@ -20,12 +19,13 @@ export const getApi = async (url: string, query?: string[]) => {
           throw {statusCode: r.status,message: msg }
         }
         if (r.ok) {
-          return r.json()
+          return r.arrayBuffer()
         }
       })
     try {
       const data = await getData()
-      const apiData = JSON.parse(JSON.stringify(data))
+      const apiData = JSON.parse(JSON.stringify(decoder(new Uint8Array(data))))
+      console.log("data:", apiData)
       return {
         data: apiData,
         error: null

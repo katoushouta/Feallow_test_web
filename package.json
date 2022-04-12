@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@link-u/ginzan": "^3.6.1",
+    "@link-u/react_imagedownloader": "^1.5.5",
     "next": "12.0.8",
     "next-transpile-modules": "^9.0.0",
     "protobufjs": "^6.11.2",

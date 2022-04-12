@@ -9,7 +9,8 @@ import s from "../../styles/pages/Search.module.sass"
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const word = context.query.word as string?? ""
-    const apiData = await getApi("search", ["word=" + word])
+    const apiData = await getApi("search", Proto.SearchView.decode, ["word=" + word])
+    console.log("data :",apiData)
     return {
         props: {
             ...apiData,
