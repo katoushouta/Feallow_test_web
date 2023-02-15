@@ -12,7 +12,7 @@ export const getApi = async (url: string,  decoder: (buffer: Uint8Array) => any,
     }) 
     const apiUrl = baseUrl + url + querys.join("")
     console.log("api", apiUrl)
-    const getData = () => fetch(apiUrl)
+    const getData = () => fetch(encodeURI(apiUrl))
       .then(r => {
         if (r.status >= 404) {
           const msg = r.text()
