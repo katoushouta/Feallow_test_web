@@ -1,5 +1,5 @@
 export const getApi = async (url: string,  decoder: (buffer: Uint8Array) => any, query?: string[]) => {
-    const baseUrl = "http://w-lu.net:18080/api/"
+    const baseUrl = "http://153.126.185.116:18080/api/"
     let querys = []
     query?.map((v, i) => {
         let w = ""
