@@ -5,7 +5,7 @@ import s from "./base.module.sass"
 
 export const Base: React.FC<{}> = (props) => {
     return (
-        <div className={s.wrap}>
+        <div className={s.wrap} id="base">
             <div className={s.header}><Header /></div>
             <div className={s.main} >
                 {props.children}

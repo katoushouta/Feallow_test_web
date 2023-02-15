@@ -1,6 +1,21 @@
 .header
+    border: 1px solid rgba(255,255,255,0.2)
+    background: rgba(255,255,255,0.7)
+    backdrop-filter: blur(5px)
+    -webkit-backdrop-filter: blur(5px)
     box-shadow: 0 0px 24px #dddddd
     padding: 32px 0
+    position: fixed
+    width: calc(100vw - 32px)
+    margin: 0 auto
+    border-radius: 0 0 16px 16px
+    top: 0
+    right: 0
+    left: 0
+    transition-property: top
+    transition-duration: 300ms
+    &.hidden
+        top: -128px
     .container
         max-width: min(1080px, calc(100vw - 64px))
         margin: 0 auto
